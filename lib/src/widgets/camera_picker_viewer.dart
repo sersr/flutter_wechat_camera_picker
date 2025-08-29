@@ -58,7 +58,6 @@ class CameraPickerViewer extends StatefulWidget {
           viewType: viewType,
           previewXFile: previewXFile,
           pickerConfig: pickerConfig,
-          createViewerState: createViewerState,
         ),
         transitionsBuilder: (
           BuildContext context,

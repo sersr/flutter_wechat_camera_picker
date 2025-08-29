@@ -7,6 +7,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart' as path;
 import 'package:video_player/video_player.dart';
 import 'package:wechat_picker_library/wechat_picker_library.dart';
@@ -87,6 +88,14 @@ class CameraPickerViewerState extends State<CameraPickerViewer> {
     } finally {
       safeSetState(() {});
     }
+  }
+
+  bool _isLandscape() {
+    return <DeviceOrientation>[
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight
+    ].contains(
+        pickerConfig.lockCaptureOrientation ?? DeviceOrientation.portraitUp);
   }
 
   /// Listener for the video player.
@@ -261,7 +270,9 @@ class CameraPickerViewerState extends State<CameraPickerViewer> {
         children: <Widget>[
           Center(
             child: AspectRatio(
-              aspectRatio: videoController.value.aspectRatio,
+              aspectRatio: _isLandscape()
+                  ? videoController.value.aspectRatio
+                  : (1 / videoController.value.aspectRatio),
               child: VideoPlayer(videoController),
             ),
           ),
