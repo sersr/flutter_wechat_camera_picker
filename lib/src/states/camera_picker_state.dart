@@ -14,6 +14,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
+import 'package:path/path.dart' as path;
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:wechat_picker_library/wechat_picker_library.dart';
 
@@ -1083,15 +1084,21 @@ class CameraPickerState extends State<CameraPicker>
         return;
       }
       controller.pausePreview();
+
+      XFile videoFile = file;
+      if (file.path.endsWith('.temp')) {
+        videoFile = XFile('${path.withoutExtension(file.path)}.mp4');
+        await file.saveTo(videoFile.path);
+      }
       final bool? isCapturedFileHandled = pickerConfig.onXFileCaptured?.call(
-        file,
+        videoFile,
         CameraPickerViewType.video,
       );
       if (isCapturedFileHandled ?? false) {
         return;
       }
       final AssetEntity? entity = await pushToViewer(
-        file: file,
+        file: videoFile,
         viewType: CameraPickerViewType.video,
       );
       if (entity != null) {

@@ -27,6 +27,7 @@ android {
     namespace "com.fluttercandies.wechatCameraPickerExample"
 
     compileSdkVersion 34
+    compileSdk = 36
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -34,7 +35,7 @@ android {
 
     defaultConfig {
         applicationId "com.fluttercandies.wechatCameraPickerExample"
-        minSdkVersion 21
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

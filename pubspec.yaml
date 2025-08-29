@@ -11,12 +11,12 @@ topics:
   - video
   - wechat
 
-repository: https://github.com/fluttercandies/flutter_wechat_camera_picker
-issue_tracker: https://github.com/fluttercandies/flutter_wechat_camera_picker/issues
+# repository: https://github.com/fluttercandies/flutter_wechat_camera_picker
+# issue_tracker: https://github.com/fluttercandies/flutter_wechat_camera_picker/issues
 
 environment:
-  sdk: ^3.4.0
-  flutter: '>=3.22.0'
+  sdk: ^3.6.0
+  flutter: '>=3.27.0'
 
 dependencies:
   flutter:
@@ -24,9 +24,11 @@ dependencies:
 
   wechat_picker_library: ^1.0.7
 
-  camera: ^0.10.0
-  camera_android: ^0.10.9+6
-  camera_platform_interface: ^2.1.5
+  camera: ^0.11.2
+  camera_platform_interface:
+  # camera:
+  #   path: /opt/temp/packages/packages/camera/camera
+  # camera_platform_interface:
 
   collection: ^1.18.0
   path: ^1.8.0
