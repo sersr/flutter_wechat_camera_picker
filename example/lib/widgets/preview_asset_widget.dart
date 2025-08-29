@@ -68,13 +68,24 @@ class _PreviewAssetWidgetState extends State<PreviewAssetWidget> {
     return AssetEntityImage(widget.asset);
   }
 
+  double? get aspectRatio {
+    final state = _playerController?.value;
+    if (state == null) return null;
+    if (!state.isInitialized) return null;
+    var aspectRatio = state.aspectRatio;
+    if (state.rotationCorrection == 90 || state.rotationCorrection == 270) {
+      aspectRatio = 1 / aspectRatio;
+    }
+    return aspectRatio;
+  }
+
   Widget _buildVideo(BuildContext context) {
     final VideoPlayerController? controller = _playerController;
     if (controller == null) {
       return const CircularProgressIndicator();
     }
     return AspectRatio(
-      aspectRatio: controller.value.aspectRatio,
+      aspectRatio: aspectRatio ?? controller.value.aspectRatio,
       child: VideoPlayer(controller),
     );
   }
